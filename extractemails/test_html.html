@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"b20549986e",applicationID:"61345185"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":0,"licenseKey":"b20549986e","agent":"","transactionName":"YVwBMUpUWhVVVBIIVlgWJRBWVkAPW1lJFlxUSgoRXRtCD1FAFVtQWF0GHQ==","applicationID":"61345185","errorBeacon":"bam.nr-data.net","applicationTime":65}</script>
+    <meta name="viewport" content="width=1200">
+    <title>CPG Data: Execution Tracking and Analytics</title>
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <link href="/static/css/index.css?v=901a14dfe8bca258d3a3e1a384bfb5cc58fe47d2" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="/static/js/jquery-1.11.1.min.js?v=901a14dfe8bca258d3a3e1a384bfb5cc58fe47d2"></script>
+    <script type="text/javascript" src="/static/js/home.js?v=901a14dfe8bca258d3a3e1a384bfb5cc58fe47d2"></script>
+    <script type="text/javascript" src="/static/js/ga-tracking.js?v=901a14dfe8bca258d3a3e1a384bfb5cc58fe47d2"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-52012518-1', 'auto', {'allowLinker': true});
+        ga('require', 'linker');
+        ga('linker:autoLink', ['cpgcamera.com', 'cpgdata.org', 'cpgdata.com'] );
+        ga('send', 'pageview');
+    </script>
+
+
+</head>
+<body >
+
+
+    <div class="popup-overlay hidden" id="signUpPopup">
+        <div class="main-width">
+            <div class="popup-sign">
+                <h2 class="sent-mesage hide">Your request has been sent</h2>
+                <form class="popup-form">
+                    <div class="close-popup _close-popup"></div>
+                    <div class="content-popup">
+                        <h2 class="give-call">PLEASE, GIVE ME A CALL!</h2>
+                        <span class="description">My sales team executes everyday and we’re ready to prove it to ourselves!</span>
+                        <div class="contact-form half pull-left">
+                                <fieldset id="signUpForm">
+                                    <p>
+                                        <label for="nameSign">Name</label><input id="nameSign" type="text"  placeholder="Tracy Neal" class="requiredSign" /><span></span>
+                                    </p>
+                                    <p>
+                                        <label for="phoneSign">Phone</label><input id="phoneSign" type="text"  placeholder="+1 347 1234567"  class="requiredSign"/><span></span>
+                                    </p>
+                                    <p>
+                                        <label for="emailSign">Email</label><input id="emailSign" type="text" placeholder="name@company.com" class="requiredSign" /><span></span>
+                                    </p>
+                                    <p>
+                                        <label for="urlSign">Distributor</label><input id="urlSign" type="text"  placeholder="Distributor name" class="requiredSign" /><span></span>
+                                    </p>
+                                    <p>
+                                        <label for="verificationSign" class="for-verificationSign">I am a human and 7+3=</label><input id="verificationSign"  placeholder="answer" class="requiredSign"  style="width: 20%;" type="text" /><span></span>
+                                    </p>
+                                    <p></p>
+                                </fieldset>
+                                <div class="sign-up-contact">
+                                    <span class="choose-person">Choose the person to contact you:</span>
+                                    <ul class="style-none pull-right" id="personSign">
+                                        <li class="anyone active" id="anyone">Anyone</li>
+                                        <li class="tracy" id="tracy">Tracy</li>
+                                        <li class="gary" id="gary">Gary</li>
+                                        <li class="chuck" id="chuck">Chuck</li>
+                                        <li class="art" id="art">Art</li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="bottom-part">
+                        <input type="submit" class="popup-sub" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+        <header id="header">
+            <div id="above">
+                <div class="main-width">
+                    <div class="social-networks-wrapper text-indent">
+                        <ul class="style-none">
+                            <li class="linkedin"><a title="LinkedIn" href="https://www.linkedin.com/company/cpg-data">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                    <div class="contact-wrapper">
+                        <ul class="style-none header-contacts">
+                            <li class="number"><div class="pull-left"></div><span class="pull-left">1-888-211-6869</span></li>
+                            <li class="email"><a href="mailto:support@cpgdata.com"><div class="pull-left"></div><span class="pull-left">support@cpgdata.com</span></a></li>
+                            <li class="location"><div class="pull-left"></div><span class="pull-left">2201 Francisco Drive, Suite 140-236, El Dorado Hills, CA 95762</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="under">
+                <div class="main-width">
+                    <h1 id="logo" class="pull-left">
+                        <a href="http://cpgdata.com/" title="CPG Data" rel="home">
+                            <img class="img-logo" src="/static/images/logo.png" alt="CPG Data" />
+                        </a>
+                    </h1>
+                    <nav id="mainMenu">
+                        <ul class="style-none">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/casestudy">Case Study</a></li>
+                            <li><a href="/blog/">Blog</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                        </ul>
+
+    <ul class="href">
+        <li link = "advantages"><a>&bull; ADVANTAGES</a></li>
+        <li link = "services"><a>&bull; SERVICES</a></li>
+        <li link = "team"><a>&bull; OUR TEAM</a></li>
+        <li link = "press"><a>&bull; IN THE PRESS</a></li>
+        <li link = "references"><a>&bull; REFERENCES</a></li>
+    </ul>
+
+                    </nav>
+
+                        <a id="login" href="/auth/login/">
+                            <div class="pull-left logo-login icons-logo position"></div>
+                            <div class="pull-left login-text">LOG IN</div>
+                        </a>
+
+
+                </div>
+            </div>
+
+        </header>
+
+
+
+        <!-- content start  -->
+        <!-- slider area  -->
+        <div class="slider-area">
+            <img class="image" src="/static/images/slider_bg1.jpg" alt="" title="" />
+            <div class="slider-wrapper">
+                <div class="prev pull-left"></div>
+                <ul class="style-none top-slider">
+                    <li class="selected">
+                        <div>
+                            <div class="slider-content-img pull-left">
+                            </div>
+                            <div class="pull-left slider-content-text">
+                                <p class="app">
+                                    Are You Winning at Retail?
+                                </p>
+                                <p class="save">Real-time execution data so you can<br/>course-correct while it still matters!</p>
+                                <div class="button-sign button-sign-popup">Sign Up For a Webinar</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class=" second-slide">
+                        <div>
+                            <div class="slider-content-img pull-left">
+                            </div>
+                            <div class="pull-left slider-content-text">
+                                <p class="app">
+                                    Volume is the<br/>result of Execution!
+                                </p>
+                                <p class="save">The pillars of execution are<br/>displays, new distribution,<br/>features, and on-premise<br/>promotions. We bleed execution.</p>
+                                <div class="button-sign button-sign-popup">Sign up for a webinar</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="third-slide">
+                        <div>
+                            <div class="slider-content-img pull-left">
+                            </div>
+                            <div class="pull-left slider-content-text">
+                                <p class="app">
+                                    The Game has evolved and<br/>so has your competition
+                                </p>
+                                <p class="save">The film room is too late, you need<br/>real-time photos of your offense so<br/>you can make in game adjustments!</p>
+                                <div class="button-sign button-sign-popup">Sign Up For a Webinar</div>
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+                <div class="next pull-right"></div>
+            </div>
+        </div>
+        <!-- slider area  -->
+        <div id="content" class="main">
+            <div style="border-bottom: 1px solid #e2e2e2;" class="cpg-data">
+                <div class="main-width">
+                    <div class="main-information" scroll-to ="advantages">
+                        <div class="left pull-left">
+                            <div class="image-wrapper"><img src="/static/images/logo_advantages.png" /></div>
+                            <div class="display">DISPLAY TRACKING AWESOMENESS!</div>
+                            <div class="text-right">
+                                <img src="/static/images/picture_Advantages_graph.png" alt="graph" />
+                            </div>
+                            <p>
+                                In the 4-Box activity plot of sales rep behaviors, securing displays week after week is the greatest and most important discipline of Execution. That’s why our Display Tracking Awesomeness survey is the cornerstone of CPG Data’s Execution Management System!
+                            </p>
+                        </div>
+                        <div class="right pull-left">
+                            <div class="item-information">
+                                <div class="item">
+                                    <div class="image adv1"></div>
+                                    <h3 class="main">Improve Ad Tracker Execution</h3>
+                                    <p class="description">It’s nice to know where you have a display, BUT it’s critical to know where<br/>you DON’T! </p>
+                                </div>
+                                <div class="item">
+                                    <div class="image adv2"></div>
+                                    <h3 class="main">Instant Incentive Updates</h3>
+                                    <p class="description">The #1 change to incentives you can make to get more bang for your buck is<br/>to provide your team with regular real-time updates on how they’re doing!<br/>We are all driven to win, but it helps to know the score! </p>
+                                </div>
+                                <div class="item">
+                                    <div class="image adv3"></div>
+                                    <h3 class="main">Historical Execution Analytics</h3>
+                                    <p class="description">When you know where the displays were, when they were, and how big<br/>they were, then you’ll know where, when, and how big they need to be<br/>next time to exceed your goals!</p>
+                                </div>
+                                <div class="item last">
+                                    <div class="image adv4"></div>
+                                    <h3 class="main">Effortless Exporting</h3>
+                                    <p class="description">It’s our job to make you as prepared and informed as possible about<br/>your market execution levels EVERY time you have a conversation with a<br/>retailer or a supplier, especially the BIG ones!</p>
+                                </div>
+                            </div>
+                            <div class="execution">
+                                <div class="arrow"></div>
+                                <h3>I`m accountable for Execution.</h3>
+                                <p>CPG Data was designed by distributor, supplier, and retail leaders who have sat in<br/>your chair and lived your execution problems. Click below to schedule a webinar and<br/>product demonstration with our team!</p>
+                                <div class="button-sign button-sign-popup">Sign up for a webinar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border-bottom: 1px solid #e2e2e2;" class="our-services-block">
+                <div class="main-width">
+                    <div class="slider-app" scroll-to ="services">
+                        <div class="content">
+                            <div class="content-header">
+                                <h3>OUR SERVICES</h3>
+                                <h2>CPG Data collected execution performance measures against<br/>the 5 most important activities in every supplier business<br/>plan you`ve signed off on.</h2>
+                            </div>
+                            <ul class="style-none">
+                                <li class="dta">
+                                    <div class="icon-wrapper">
+                                        <p>
+                                            Frequency: Weekly (HIGH)<br/>Revenue Driver: Immediate (HIGH)
+                                        </p>
+                                    </div>
+                                    <h4>Displays</h4>
+                                    <p class="description">What if you knew your display support of feature results before your retailer?<br/>Having your sales team use CPG Data is like having a quarterback in the NFL<br/>getting real time photos of the defense in between series. It allows you to<br/>make adjustments WHILE IT STILL MATTERS!</p>
+                                    <a class="button-sign button-sign-popup">Sign up for a webinar</a>
+                                </li>
+                                <li class="ths">
+                                    <div class="icon-wrapper">
+                                        <p>
+                                            Frequency: Monthly (MEDIUM)<br/>Revenue Driver: Current (MEDIUM)
+                                        </p>
+                                    </div>
+                                    <h4>Taps</h4>
+                                    <p class="description">This is more than a “supplier compliance” tool. It is the fastest and easiest tap<br/>handle survey on the market! You’ll love the month over month tracking of<br/>trends by supplier, by brand, by segment, by chain, or by sales territory. CPG<br/>Data’s THS survey is the first comprehensive market share measuring system<br/>for the keg beer!</p>
+                                    <a class="button-sign button-sign-popup">Sign up for a webinar</a>
+                                </li>
+                                <li class="npp">
+                                    <div class="icon-wrapper">
+                                        <p>
+                                            Frequency: Monthly (MEDIUM)<br/>Revenue Driver: Immediate (HIGH)
+                                        </p>
+                                    </div>
+                                    <h4>POD</h4>
+                                    <p class="description">This survey was created by our first distributor customer who said: “I’m sick<br/>and tired of paying for new points of distribution and then finding out that the<br/>product never made it to the shelf! Tony says he’s now saving up to 40% on<br/>monthly PFP dollars by paying only against placements that are tracked by<br/>CPG Data’s NPP survey!</p>
+                                    <a class="button-sign button-sign-popup">Sign up for a webinar</a>
+                                </li>
+                                <li class="oop">
+                                    <div class="icon-wrapper">
+                                        <p>
+                                            Frequency: Monthly (MEDIUM)<br/>Revenue Driver: Immediate (HIGH)
+                                        </p>
+                                    </div>
+                                    <h4>Promos</h4>
+                                    <p class="description">Are you down with OPP? Or up with OPP? Track all of your on-premise<br/>promotions with CPG Data’s OPP survey. The summary of promotions by<br/>brand will save your team hours if not days and the insight on where your<br/>resources are going (or not) help you make better allocation decisions that<br/>drive desired results!</p>
+                                    <a class="button-sign button-sign-popup">Sign up for a webinar</a>
+                                </li>
+                                <li class="mgr">
+                                    <div class="icon-wrapper">
+                                        <p>
+                                            Frequency: Weekly (HIGH)<br/>Revenue Driver: Delayed (LOW)
+                                        </p>
+                                    </div>
+                                    <h4>MRG: Manager`s App</h4>
+                                    <p class="description">We’ve all done it… You see a great display – or a terrible one – at 7:30 AM and by the time you’re with that person so many things have happened that the details are fuzzy and the coaching opportunity has passed. With the MGR survey, managers can “capture & caption” what they see in the market and reference a photo for a fact-based discussion later.  CPG Data’s MGR survey is an investment in the development of your people!</p>
+                                    <a class="button-sign button-sign-popup">Sign up for a webinar</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="switcher">
+                            <ul class="style-none">
+                                <li class="first"></li>
+                                <li class="selected">Displays</li>
+                                <li>Taps</li>
+                                <li>POD</li>
+                                <li>Promos</li>
+                                <li>MGR</li>
+                                <li class="last"></li>
+                            </ul>
+                        </div>
+                        <img src="/static/images/shaddow.png" class="shadow-img"/>
+                    </div>
+                </div>
+            </div>
+            <div class="our-team" scroll-to ="team">
+                <div class="main-width">
+                    <div class="team-wrapper-main">
+                        <h2 class="meet">Meet Our Team</h2>
+                        <div class="team-items">
+                            <div class="team-member">
+                                <div class="header-member tracy">
+                                    <h3 class="location">California</h3>
+                                    <h2 class="name">Tracy B. Neal</h2>
+                                    <h3 class="post">President/CEO</h3>
+                                </div>
+                                <p class="description">
+                                    Beer Industry Veteran since 1994, Former GM of<br/>MillerCoors and Coors Brewing Company with a<br/>legacy for out of the box solutions and a passion<br/>towards improving execution.
+                                </p>
+                                <div class="link-id">
+                                    <a href="http://www.linkedin.com/pub/tracy-b-neal/0/13a/113" target="_blank">Connect via LinkedIn</a>
+                                </div>
+                            </div>
+                            <div class="team-member">
+                                <div class="header-member robin">
+                                    <h3 class="location">Texas</h3>
+                                    <h2 class="name">Robin Cook</h2>
+                                    <h3 class="post">Enterprise Account Manager</h3>
+                                </div>
+                                <p class="description">
+                                    Former Coors Brewing Company on-premise<br/>manager with experience in business coaching, event<br/>marketing, and distributor management.
+                                </p>
+                                <div class="link-id">
+                                    <a href="https://www.linkedin.com/in/robinlee88" target="_blank">Connect via LinkedIn</a>
+                                </div>
+                            </div>
+                            <div class="team-member" style="padding-right: 0">
+                                <div class="header-member melvin">
+                                    <h3 class="location">California</h3>
+                                    <h2 class="name">Melvin Nelson</h2>
+                                    <h3 class="post">Distributor Account Manager</h3>
+                                </div>
+                                <p class="description">
+                                    20+ years in customer service and sales; managing beverage departments for race tracks, concert<br />venues, casino properties and NBA arena facilities.
+                                </p>
+                                <div class="link-id">
+                                    <a href="https://www.linkedin.com/pub/melvin-nelson/a2/504/6a1" target="_blank">Connect via LinkedIn</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-items">
+                            <div class="team-member">
+                                <div class="header-member gary">
+                                    <h3 class="location">California</h3>
+                                    <h2 class="name">Gary Styles</h2>
+                                    <h3 class="post">VP of Business Development</h3>
+                                </div>
+                                <p class="description">
+                                    40 year executive of the beverage industry. Expertise:<br/>business strategies and development, transaction<br/>negotiations, revenue management and finance.
+                                </p>
+                                <!--<div class="link-id">
+                                    <a href="" target="_blank">Connect via LinkedIn</a>
+                                </div>-->
+                            </div>
+                            <div class="team-member">
+                                <div class="header-member chuck">
+                                    <h3 class="location">Colorado</h3>
+                                    <h2 class="name">Chuck Zulunas III</h2>
+                                    <h3 class="post">VP of Business Development</h3>
+                                </div>
+                                <p class="description">
+                                    Beer Industry Veteran since 1982, former<br/>distributorship owner and currently a Beverage<br/>Distributorship Technology Consultant.
+                                </p>
+                                <div class="link-id">
+                                    <a href="https://www.linkedin.com/profile/view?id=13761807&authType=OUT_OF_NETWORK&authToken=6Qfv&locale=en_US&trk=tyah2&trkInfo=tarId%3A1407877757859%2Ctas%3Achu%2Cidx%3A2-1-2" target="_blank">Connect via LinkedIn</a>
+                                </div>
+                            </div>
+                            <div class="team-member" style="padding-right: 0">
+                                <div class="header-member art">
+                                    <h3 class="location">Florida</h3>
+                                    <h2 class="name">Art Friedman</h2>
+                                    <h3 class="post">VP of Business Development</h3>
+                                </div>
+                                <p class="description">
+                                    Former GM of Southern Wine & Spirits Florida, Chain<br/>Division and former President and CEO of Gold Coast<br/>Beverage Distributors. Served on distributor advisory<br/>councils for Diageo-Guinness, Heineken USA, InBev,<br/>and MillerCoors.
+                                </p>
+                                <div class="link-id">
+                                    <a href="https://www.linkedin.com/pub/art-friedman/13/566/816" target="_blank">Connect via LinkedIn</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="press" scroll-to="press">
+                <div class="main-width">
+                    <div class="press-wrapper">
+                        <h2 class="meet">IN THE PRESS</h2>
+                        <div class="clearfix"></div>
+                        <div class="press-member first">
+                            <a target="_blank" href="http://www.bizjournals.com/sacramento/print-edition/2014/06/20/el-dorado-hills-based-cpg-data-helps-liquor-sales.html?page=all"><img src="/static/images/picture_press_1.png"/></a>
+                            <p class="header-press">SACRAMENTO BUSINESS JOURNAL</p>
+                            <a target="_blank" href="http://www.bizjournals.com/sacramento/print-edition/2014/06/20/el-dorado-hills-based-cpg-data-helps-liquor-sales.html?page=all"><p class="description-press">El Dorado Hills-based CPG Data<br/>helps liquor sales go high-tech</p>
+                            <p class="footer-press">Shelf sales from the liquor department in a<br/>supermarket are predictable and depend only on</p></a>
+                        </div>
+                        <div class="press-member second">
+                            <a target="_blank" href="http://gsm.ucdavis.edu/spotlight-story/tracy-neal-mba-01-brews-success"><img src="/static/images/picture_press_2.png"/></a>
+                            <p class="header-press">UC Davis</p>
+                            <a target="_blank" href="http://gsm.ucdavis.edu/spotlight-story/tracy-neal-mba-01-brews-success"><p class="description-press">Tracy Neal MBA 01 Brews Success</p>
+                            <p class="footer-press">Over the past two decades, Tracy Neal MBA 01 has “bounced back and forth between the beer industry...</p></a>
+                        </div>
+                    </div>
+                    <div class="button-sign button-sign-popup">Sign up for a webinar</div>
+                </div>
+            </div>
+            <div class="references" scroll-to="references">
+                <div class="main-width">
+                    <div class="references-wrapper">
+                        <div class="customers-saying">
+                            <h2>WHAT OUR CUSTOMERS ARE SAYING</h2>
+                            <ul class="style-none content-refer">
+                                <li class="selected">
+                                   <div class="company-wrapper glazers">
+                                       <p class="description">
+                                           "The CPG data program allows us to get real time information on display support of feature<br/>execution without having to physically make every store. It also allows us to get a quick recap<br/>of all display activity, including competition, and through the reporting functions it allows for<br/>a quick sorting of information by salesman, DM, chain account,etc. The CPG Data program<br/>is part of our daily activities that reinforce selling more beer and I would highly recommend<br/>it for all wholesalers."
+                                       </p>
+                                       <p class="name">Phil Meacham </p>
+                                       <p class="vacancy">Executive Vice President of Malt Beverages, Glazer's</p>
+                                   </div>
+                                    <div class="company-wrapper mesa">
+                                        <p class="description">
+                                            “We use CPG Data every single day at Mesa Beverage. We track display execution against<br/>chain features, we review trade execution with our suppliers, and we use the photos<br/>internally to coach and train our sales team on our execution standards at retail. And the<br/>new Tap Handle Survey helped us identify a weak competitor in the market and provided<br/>us with a target list by sales rep to increase our on-premise market share.”
+                                        </p>
+                                        <p class="name">Mark Herculson</p>
+                                        <p class="vacancy">President, Mesa Beverage, Inc.</p>
+                                    </div>
+                                    <div class="company-wrapper capital">
+                                        <p class="description">
+                                            “The CPG Data Team understands our business! They have supported us throughout the<br/>year and have been very responsive in helping us to capture and identify the metrics that<br/>drive our business.  This is the best new service to measure retail execution in the industry.”
+                                       </p>
+                                        <p class="name">Gordon Green</p>
+                                        <p class="vacancy">General Manager, Capital Distributing</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="company-wrapper abc">
+                                        <p class="description">
+                                            “Congratulations to CPG Data for providing Admiral Beverage with a great sales tool!  My<br/>Brand Managers are saving 4 office hours a week because of CPG Data. Compiling pictures<br/>for our numerous incentives is now an easy process and our suppliers love CPG Data. The<br/>professional pictures have reinforced the fact that we are a Best in Class Beer Distributor.”
+                                        </p>
+                                        <p class="name">Greg Brown</p>
+                                        <p class="vacancy">General Manager, Admiral Beverage Company</p>
+                                    </div>
+                                    <div class="company-wrapper miller">
+                                        <p class="description">
+                                            “On our MBO's with displays we had issues on verification; when, where and the number of cases. With CPG Data it's all rolled up by supplier or by chain account by a push of a button.“
+                                        </p>
+                                        <p class="name">Dick Fisher</p>
+                                        <p class="vacancy">General Manager, Miller of Denton</p>
+                                    </div>
+                                    <div class="company-wrapper rogo">
+                                        <p class="description">
+                                            “We have been with CPG Data for about a year now. We use the display tool to track weekly display results for our house, by supplier & size. The app is fast and easy to use for the sales reps in addition it doesn’t flood your inbox with emails. Everything you need is in the cloud and all the recapping is done for you. We just started with the new draft survey app [Tap Handle Survey] which we are excited to have.“
+                                        </p>
+                                        <p class="name">Kevin Byrnes</p>
+                                        <p class="vacancy">General Manger, ROGO Distributors</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="switcher">
+                                <ul class="style-none">
+                                    <li class="first"></li>
+                                    <li class="selected"></li>
+                                    <li></li>
+                                    <li class="last"></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="description-references">
+                            <div class="description ptsans">
+                                <p>Most of our customers can be up and running<br/>with CPG Data in less than 48 hours.</p>
+                                <p>There’s no extra hardware to purchase, no<br/>software to load, and no legacy system<br/>integration to manage!</p>
+                                <p>We hope you like your RAS vendor because<br/>we don’t provide RAS and we want you to<br/>keep doing business with them.</p>
+                            </div>
+                            <a href="/contact"><div class="button">Contact Us</div></a>
+                            <div class="clearfix"></div>
+                            <div class="description">
+                                <p>CPG Data is a cloud-based service support by<br/>Amazon Web Services with emergency back<br/>up, enhanced security, and dedicated<br/>protocols for a 99.999% uptime guarantee. All<br/>data is stored and accessible for 24 months.</p>
+                            </div>
+                            <div class="button-sign button-sign-popup">Sign up for a webinar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content end  -->
+
+
+         <footer id="footer">
+            <div class="main-width">
+                <div class="logo-footer-container pull-left">
+                    <div id="logoFooter">
+                        <a href="http://cpgdata.com/" title="CPG Data" rel="home">
+                            <img class="img-logo" src="/static/images/logo_footer.png" alt="CPG Data" />
+                            <div>Copyright © 2013-2020 CPG Data</div>
+                        </a>
+                    </div>
+                    <div class="button  button-sign-footer button-sign-popup">Sign up for a webinar</div>
+                    <div class="clearfix"></div>
+                    <a href="/contact"><div class="button">Contact Us</div></a>
+                    <div class="clearfix"></div>
+                    <a class="privacy-link" target="_blank" href="/legal/privacy/">Privacy Policy</a><br/>
+                    <a class="privacy-link terms-link" target="_blank" href="/static/pdf/terms_and_conditions.pdf?v=901a14dfe8bca258d3a3e1a384bfb5cc58fe47d2">Terms and Conditions</a>
+                </div>
+                <div class="provide-container pull-left">
+                    <span id="slogan">Volume is the result of Execution! There are five pillars of disciplined execution and CPG Data supports all five in one easy, fast, foolproof App!</span>
+                    <ul class="style-none items">
+                        <li><span class="first">Displays</span><span class="center">=</span><span class="last">Display Tracking Awesomeness!</span></li>
+                        <li><span class="first">Distribution</span><span class="center">=</span><span class="last">POD: Points of Distribution</span></li>
+                        <li><span class="first">Draft Share</span><span class="center">=</span><span class="last">Taps Handle Survey</span></li>
+                        <li><span class="first">On-Premise Features</span><span class="center">=</span><span class="last">Promos: On Premise Promotions</span></li>
+                        <li><span class="first">People Development</span><span class="center">=</span><span class="last">MGR: Manager’s Capture & Caption</span></li>
+                    </ul>
+                </div>
+                <div class="follow-us-container">
+                    <span>Follow Us</span>
+                    <ul class="style-none">
+                        <li class="in icons-logo"><a title="Linkedin" href="https://www.linkedin.com/company/cpg-data"></a></li>
+                    </ul>
+                    <div class="contact-footer-container">
+                        <p>Contact Us</p>
+                        <h6>2201 Francisco Drive</h6>
+                        <h6>Suite 140-236</h6>
+                        <h6 style="margin-bottom: 30px;">El Dorado Hills, CA 95762</h6>
+                        <h6>1-888-211-6869</h6>
+                        <a href="mailto::tracy.neal@cpgdata.com"><h6 class="last pull-left">tracy.neal@cpgdata.com</h6></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+</body>
+</html>

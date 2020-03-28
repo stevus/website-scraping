@@ -2,10 +2,10 @@
 
 import csv
 import os
-import re
 import requests
 import shutil
 
+from . import find_emails
 from bs4 import BeautifulSoup
 from collections import deque
 from tempfile import NamedTemporaryFile
@@ -30,9 +30,14 @@ unscraped = deque([])
 with open(input_file, mode='r') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     for row in csv_reader:
+        if row[5] == 'AVOID':
+            continue
+
         if row[2] in (None , '') and row[0] not in (None , ''):
             # get base url to limit crawler to business URLs only
-            base_urls.add(row[1])
+            data = urlparse(row[1])
+            base_url = '%s://%s' % (data.scheme, data.netloc)
+            base_urls.add(base_url)
             # add seed URL to unscraped list
             unscraped.append(CompanyUrl(row[0], row[1]))
 
@@ -59,19 +64,26 @@ while len(unscraped):
 
     try:
         response = requests.get(url)
+
+        # handle redirected URL in case the comopany changed domains
+        if response.history:
+            for resp in response.history:
+                parsed_link = urlparse(response.url)
+                clean_link = '%s://%s%s' % (parsed_link.scheme, parsed_link.netloc, parsed_link.path)
+                print('URL for %s redirects from %s to %s' % (co.name, url, clean_link))
+                base_url = '%s://%s' % (parsed_link.scheme, parsed_link.netloc)
+                base_urls.add(base_url)
+                unscraped.append(CompanyUrl(co.name, clean_link))
+
     except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError):
         continue
 
-    new_emails = set(
-        re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.com", response.text, re.I)
-    )
-
-    print('Found %s emails for %s' % (len(new_emails), co.name))
-
+    new_emails = find_emails(response.content, response.text)
+    print('Found %s email for %s' % (len(new_emails), co.name))
     emails[co.name] = emails.get(co.name, set())
     emails[co.name].update(new_emails)
 
-    soup = BeautifulSoup(response.text, "lxml")
+    soup = BeautifulSoup(response.content, "lxml")
 
     # find additional links on the page and add to unscraped if they qualify
     found_links = set()
