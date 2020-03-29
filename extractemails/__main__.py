@@ -1,5 +1,6 @@
 # @link https://medium.com/swlh/how-to-scrape-email-addresses-from-a-website-and-export-to-a-csv-file-c5d1becbd1a0
 
+import cgi
 import csv
 import os
 import requests
@@ -22,6 +23,7 @@ input_file = 'extractemails/websites.csv'
 temp_file = '/tmp/tmp_websites.csv'
 
 base_urls = set()
+companies = {}
 emails = {}
 scraped = set()
 unscraped = deque([])
@@ -47,10 +49,15 @@ while len(unscraped):
     co = unscraped.popleft()
     raw_url = co.url
 
-    data = urlparse(raw_url)
+    parsed_link = urlparse(raw_url)
 
-    base_url = '%s://%s' % (data.scheme, data.netloc)
-    url = '%s://%s%s' % (data.scheme, data.netloc, data.path)
+    base_url = '%s://%s' % (parsed_link.scheme, parsed_link.netloc)
+    url = '%s://%s%s' % (parsed_link.scheme, parsed_link.netloc, parsed_link.path)
+
+    filtered_path = list(filter(lambda x: x != '' and x != None, parsed_link.path.split('/')))
+    if len(filtered_path) > 1:
+        # At the moment I dont care for links that are more than 1 folder deep
+        continue
 
     if url in scraped:
         continue
@@ -63,23 +70,39 @@ while len(unscraped):
     print("Crawling URL %s" % url)
 
     try:
-        response = requests.get(url)
-
-        # handle redirected URL in case the comopany changed domains
-        if response.history:
-            for resp in response.history:
-                parsed_link = urlparse(response.url)
-                clean_link = '%s://%s%s' % (parsed_link.scheme, parsed_link.netloc, parsed_link.path)
-                print('URL for %s redirects from %s to %s' % (co.name, url, clean_link))
-                base_url = '%s://%s' % (parsed_link.scheme, parsed_link.netloc)
-                base_urls.add(base_url)
-                unscraped.append(CompanyUrl(co.name, clean_link))
-
-    except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError):
+        response = requests.get(url, timeout=5)
+    except (requests.exceptions.MissingSchema, requests.exceptions.ConnectionError, requests.exceptions.ReadTimeout):
+        companies[co.name] = 'ERROR'
         continue
 
+    # dont crawl URLs that are text/html
+    mimetype, options = cgi.parse_header(response.headers['Content-Type'])
+    if mimetype != 'text/html':
+        print('Unsupported mimetype: %s' % mimetype)
+        continue
+
+    # handle redirected URL in case the company changed domains
+    if response.history:
+
+        for resp in response.history:
+
+            red_parsed_link = urlparse(response.url)
+            red_clean_link = '%s://%s%s' % (red_parsed_link.scheme, red_parsed_link.netloc, red_parsed_link.path)
+            red_base_url = '%s://%s' % (red_parsed_link.scheme, red_parsed_link.netloc)
+
+            if parsed_link.netloc != red_parsed_link.netloc:
+                # domain.com != newdomain.com
+                print('URL for %s redirects from %s to %s' % (co.name, url, red_clean_link))
+                base_urls.add(red_base_url)
+                unscraped.append(CompanyUrl(co.name, red_clean_link))
+            elif parsed_link.netloc == red_parsed_link.netloc and red_parsed_link.scheme != parsed_link.scheme:
+                # http => https or https => http
+                url = red_clean_link
+
     new_emails = find_emails(response.content, response.text)
+
     print('Found %s email for %s' % (len(new_emails), co.name))
+
     emails[co.name] = emails.get(co.name, set())
     emails[co.name].update(new_emails)
 
@@ -89,6 +112,7 @@ while len(unscraped):
     found_links = set()
     for anchor in soup.find_all("a", href=True):
 
+        # cant do anything with these hrefs
         if anchor['href'] is None or anchor['href'] == '#' or anchor['href'].endswith(".gz"):
             continue
 
@@ -121,18 +145,23 @@ with open(input_file, "r") as infile, open(temp_file, "w") as outfile:
     writer.writeheader()
 
     for row in reader:
+        # read in error state if I've marked it so it can be ignored on the next run
+        notes = companies.get(row[0], row[5])
+
+        # dont override emails if they already exist in the CSV
         if row[2] not in (None , ''):
             coemails = row[2]
         else:
             coemails = '|'.join(emails.get(row[0], set()))
 
+        # write the row
         write_row = {
             'Name': row[0],
             'URL': row[1],
             'Email': coemails,
             'Phone': None,
             'Contact': None,
-            'Notes': None
+            'Notes': notes
         }
         writer.writerow(write_row)
 

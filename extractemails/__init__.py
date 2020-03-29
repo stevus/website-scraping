@@ -8,7 +8,7 @@ def find_emails(content, text):
     emails = set()
 
     # catch all emails in text
-    emails_re = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.com", text, re.I)
+    emails_re = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]{2,3}", text, re.I)
     emails.update(emails_re)
 
     # catch emails specifically in mailto links
